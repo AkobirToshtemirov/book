@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${edit}" th:text="'Edit Book - ' + ${book.title}" th:unless="${edit}">Add Book</title>
+</head>
+<body>
+<h1 th:if="${edit}" th:text="'Edit Book - ' + ${book.title}" th:unless="${edit}">Add Book</h1>
+<form th:if="${edit}" th:action="@{/books/update}" th:object="${book}" method="post">
+    <input type="hidden" th:field="*{id}">
+    Title: <input type="text" th:field="*{title}"><br>
+    Description: <input type="text" th:field="*{description}"><br>
+    Price: <input type="text" th:field="*{price}"><br>
+    Author: <input type="text" th:field="*{author}"><br>
+    <button type="submit">Update</button>
+</form>
+<form th:unless="${edit}" th:action="@{/books/add}" th:object="${book}" method="post">
+    Title: <input type="text" th:field="*{title}"><br>
+    Description: <input type="text" th:field="*{description}"><br>
+    Price: <input type="text" th:field="*{price}"><br>
+    Author: <input type="text" th:field="*{author}"><br>
+    <button type="submit">Add</button>
+</form>
+<a href="/books">Back to List</a>
+</body>
+</html>
